@@ -6,6 +6,7 @@ export { ActionItem } from "./ActionItem";
 export { KeyTakeaway } from "./KeyTakeaway";
 export { NextPreview } from "./NextPreview";
 export { Callout } from "./Callout";
+export { Mermaid } from "./Mermaid";
 
 // MDX compileMDX에 주입할 컴포넌트 매핑 객체
 // lib/mdx.ts에서 기본값으로 사용

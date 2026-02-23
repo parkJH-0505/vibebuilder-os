@@ -193,6 +193,42 @@ Supabase를 쓰면 데이터베이스 테이블을 만드는 순간 REST API가 
 
 ---
 
+## 전체 그림 — 5가지 장기는 이렇게 연결됩니다
+
+5가지를 하나씩 열어봤으니, 이제 전체가 어떻게 연결되는지 한 장의 그림으로 봅시다. 사용자의 클릭이 프론트엔드에서 시작되어 데이터베이스까지 도달하고 돌아오는 흐름입니다.
+
+<Mermaid chart={`graph LR
+    subgraph INFRA["☁️ 인프라/배포 (Vercel/Railway)"]
+        subgraph FE["🖥️ 프론트엔드"]
+            F1["React/Next.js\nHTML + CSS + JS\n사용자가 보는 화면"]
+        end
+
+        subgraph API["📮 API Layer"]
+            A1["REST API\nHTTP 요청/응답\nURL + Method + Body"]
+        end
+
+        subgraph BE["⚙️ 백엔드"]
+            B1["비즈니스 로직\n규칙 적용\n데이터 처리"]
+        end
+
+        subgraph DB["🗄️ 데이터베이스"]
+            D1["PostgreSQL\nNoSQL\n데이터 영구 저장"]
+        end
+    end
+
+    U["👤 사용자"] -->|클릭/입력| FE
+    FE <-->|HTTP 요청/응답| API
+    API <-->|처리 지시| BE
+    BE <-->|저장/조회| DB
+
+    style INFRA fill:#F1F5F9,stroke:#94A3B8
+    style FE fill:#EDE9FE,stroke:#7C3AED
+    style API fill:#D1FAE5,stroke:#059669
+    style BE fill:#FEF3C7,stroke:#D97706
+    style DB fill:#DBEAFE,stroke:#2563EB`} caption="5가지 구성요소의 연결 구조 — 사용자의 모든 행동은 이 경로를 따라 이동합니다" />
+
+---
+
 ## 빈 곳이 보이면 어디가 빠졌는지도 보인다
 
 5가지를 전부 열어봤으니, 이제 각각이 빠지면 어떤 일이 벌어지는지 한눈에 정리해봅시다.
