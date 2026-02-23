@@ -1,4 +1,5 @@
 import { compileMDX } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import type { ChapterFrontmatter } from "./chapters";
 import { mdxComponents } from "@/components/mdx/mdxComponents";
@@ -21,6 +22,7 @@ export async function compileMDXContent(
     options: {
       parseFrontmatter: true,
       mdxOptions: {
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
       },
     },
