@@ -1,22 +1,40 @@
 "use client";
 
 // Mermaid — 다이어그램 렌더링 컴포넌트 (클라이언트)
-// MDX에서 <Mermaid chart={`...`} /> 형태로 사용
+// MDX에서 두 가지 방식 지원:
+//   1. <Mermaid chart="..." />  (prop)
+//   2. <Mermaid>차트코드</Mermaid>  (children)
 // mermaid 라이브러리를 동적 로드하여 SVG로 렌더링
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface MermaidProps {
-  chart: string;
+  chart?: string;
   caption?: string;
+  children?: ReactNode;
 }
 
-export function Mermaid({ chart, caption }: MermaidProps) {
+// children에서 텍스트를 추출하는 헬퍼
+function extractText(node: ReactNode): string {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return extractText((node as any).props.children);
+  }
+  return "";
+}
+
+export function Mermaid({ chart, caption, children }: MermaidProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  // chart prop 또는 children에서 차트 코드 추출
+  const chartCode = chart || extractText(children);
+
   useEffect(() => {
+    if (!chartCode) return;
     let cancelled = false;
 
     async function renderChart() {
@@ -30,14 +48,16 @@ export function Mermaid({ chart, caption }: MermaidProps) {
         });
 
         const id = `mermaid-${Math.random().toString(36).slice(2, 9)}`;
-        const { svg: rendered } = await mermaid.render(id, chart.trim());
+        const { svg: rendered } = await mermaid.render(id, chartCode.trim());
         if (!cancelled) {
           setSvg(rendered);
           setError("");
         }
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "다이어그램 렌더링 실패");
+          setError(
+            err instanceof Error ? err.message : "다이어그램 렌더링 실패"
+          );
         }
       }
     }
@@ -46,7 +66,11 @@ export function Mermaid({ chart, caption }: MermaidProps) {
     return () => {
       cancelled = true;
     };
-  }, [chart]);
+  }, [chartCode]);
+
+  if (!chartCode) {
+    return null;
+  }
 
   if (error) {
     return (
