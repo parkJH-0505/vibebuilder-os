@@ -1,6 +1,7 @@
 import { Hero } from "@/components/landing/Hero";
 import { JourneyPreview } from "@/components/landing/JourneyPreview";
 import { TargetAudience } from "@/components/landing/TargetAudience";
+import { SocialProof } from "@/components/landing/SocialProof";
 import { MetaBanner } from "@/components/landing/MetaBanner";
 
 // 랜딩 페이지 (/)
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <JourneyPreview />
       <TargetAudience />
+      <SocialProof />
       <MetaBanner />
     </div>
   );

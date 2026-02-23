@@ -23,14 +23,20 @@ export function Hero() {
           16챕터 &middot; 약 10시간 &middot; 비개발자 관점 100%
         </p>
 
-        {/* CTA 버튼 */}
-        <div className="mt-10">
+        {/* CTA 버튼 — PathSelector 역할: 두 가지 진입 경로 */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Link
-            href="/chapters"
+            href="/chapters/ch00-why-now"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-500 hover:bg-blue-600 active:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white transition-colors"
           >
-            시작하기
+            처음부터 시작하기
             <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link
+            href="/chapters"
+            className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-7 py-3.5 text-base font-medium text-zinc-700 dark:text-zinc-300 transition-colors"
+          >
+            내 수준에서 시작
           </Link>
         </div>
       </div>

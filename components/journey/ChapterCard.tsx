@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { isChapterComplete } from "@/lib/progress";
 
 // 챕터 카드 컴포넌트 — 목록 페이지에서 각 챕터를 표시
 interface ChapterCardProps {
@@ -18,6 +22,12 @@ export default function ChapterCard({
   description,
   isAvailable,
 }: ChapterCardProps) {
+  const [completed, setCompleted] = useState(false);
+
+  useEffect(() => {
+    setCompleted(isChapterComplete(slug));
+  }, [slug]);
+
   // 사용 불가 챕터: 클릭 불가 + 회색 처리
   if (!isAvailable) {
     return (
@@ -56,14 +66,23 @@ export default function ChapterCard({
         dark:hover:border-zinc-700 dark:hover:bg-zinc-900
       "
     >
-      {/* 챕터 번호 배지 */}
-      <span className="mt-0.5 shrink-0 text-sm font-mono font-medium text-zinc-500 dark:text-zinc-400">
-        Ch.{chapterNumber}
-      </span>
+      {/* 완료 표시 또는 챕터 번호 */}
+      {completed ? (
+        <span className="mt-0.5 shrink-0 text-sm text-green-500" aria-label="완료">
+          &#10003;
+        </span>
+      ) : (
+        <span className="mt-0.5 shrink-0 text-sm font-mono font-medium text-zinc-500 dark:text-zinc-400">
+          Ch.{chapterNumber}
+        </span>
+      )}
 
       {/* 챕터 정보 */}
       <div className="min-w-0 flex-1">
         <p className="font-medium text-zinc-900 group-hover:text-zinc-700 dark:text-zinc-100 dark:group-hover:text-zinc-300">
+          {completed && (
+            <span className="mr-1.5 text-xs font-normal text-green-500">완료</span>
+          )}
           {title}
         </p>
         {description && (

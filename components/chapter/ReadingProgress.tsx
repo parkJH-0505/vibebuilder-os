@@ -5,7 +5,7 @@
 // passive 이벤트 리스너로 성능 최적화
 
 import { useEffect, useState } from "react";
-import { saveScrollPosition } from "@/lib/progress";
+import { saveScrollPosition, updateLastVisited } from "@/lib/progress";
 
 interface ReadingProgressProps {
   slug: string; // 현재 챕터 slug — 스크롤 위치 저장에 사용
@@ -34,6 +34,9 @@ export function ReadingProgress({ slug }: ReadingProgressProps) {
       // 스크롤 위치 localStorage에 저장 (throttle 없이 — 가벼운 연산)
       saveScrollPosition(slug, percent);
     }
+
+    // 마지막 방문 챕터 기록
+    updateLastVisited(slug);
 
     // 초기값 설정 (페이지 로드 시 스크롤이 이미 있을 수 있음)
     setProgress(calculateProgress());
