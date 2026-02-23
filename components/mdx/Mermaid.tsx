@@ -25,13 +25,28 @@ function extractText(node: ReactNode): string {
   return "";
 }
 
+// base64 디코딩 — 클라이언트 환경용 (Buffer 없음)
+function decodeBase64(str: string): string {
+  try {
+    return decodeURIComponent(
+      atob(str)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+  } catch {
+    // base64가 아닌 경우 원본 반환
+    return str;
+  }
+}
+
 export function Mermaid({ chart, caption, children }: MermaidProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  // chart prop 또는 children에서 차트 코드 추출
-  const chartCode = chart || extractText(children);
+  // chart prop은 base64 인코딩되어 전달됨 (MDX JSX 파서 호환성)
+  const chartCode = chart ? decodeBase64(chart) : extractText(children);
 
   useEffect(() => {
     if (!chartCode) return;
