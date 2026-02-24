@@ -12,6 +12,15 @@ import { Tabs, Tab } from "./Tabs";
 import { TwoColumn, Left, Right } from "./TwoColumn";
 import { Figure } from "./Figure";
 import { BeforeAfterCompare, Before, After } from "./BeforeAfterCompare";
+// Phase 2A 인포그래픽
+import { JourneyRoadmap } from "../infographics/JourneyRoadmap";
+import { IcebergDiagram } from "../infographics/IcebergDiagram";
+import { RestaurantMapping } from "../infographics/RestaurantMapping";
+import { MoscowPyramid } from "../infographics/MoscowPyramid";
+import { PromptFormula } from "../infographics/PromptFormula";
+import { TechDebtGraph } from "../infographics/TechDebtGraph";
+import { BuilderCycle } from "../infographics/BuilderCycle";
+import { FeedbackMatrix } from "../infographics/FeedbackMatrix";
 
 // MDX 파일에서 <SelfCheck>, <ActionItem>, <Mermaid> 등으로 바로 사용 가능
 export const mdxComponents = {
@@ -33,4 +42,13 @@ export const mdxComponents = {
   BeforeAfterCompare,
   Before,
   After,
+  // Phase 2A 인포그래픽
+  JourneyRoadmap,
+  IcebergDiagram,
+  RestaurantMapping,
+  MoscowPyramid,
+  PromptFormula,
+  TechDebtGraph,
+  BuilderCycle,
+  FeedbackMatrix,
 };
