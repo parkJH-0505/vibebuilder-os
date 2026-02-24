@@ -23,6 +23,11 @@ export { TechDebtGraph } from "../infographics/TechDebtGraph";
 export { BuilderCycle } from "../infographics/BuilderCycle";
 export { FeedbackMatrix } from "../infographics/FeedbackMatrix";
 
+// Phase 3 인터랙티브 컴포넌트
+export { ProgressChecklist, CheckItem } from "./ProgressChecklist";
+export { DiagnosticQuiz } from "./DiagnosticQuiz";
+export { LayerDiagram } from "./LayerDiagram";
+
 // MDX compileMDX에 주입할 컴포넌트 매핑 객체
 // lib/mdx.ts에서 기본값으로 사용
 export { mdxComponents } from "./mdxComponents";

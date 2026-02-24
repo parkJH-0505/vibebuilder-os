@@ -21,6 +21,10 @@ import { PromptFormula } from "../infographics/PromptFormula";
 import { TechDebtGraph } from "../infographics/TechDebtGraph";
 import { BuilderCycle } from "../infographics/BuilderCycle";
 import { FeedbackMatrix } from "../infographics/FeedbackMatrix";
+// Phase 3 인터랙티브 컴포넌트
+import { ProgressChecklist, CheckItem } from "./ProgressChecklist";
+import { DiagnosticQuiz } from "./DiagnosticQuiz";
+import { LayerDiagram } from "./LayerDiagram";
 
 // MDX 파일에서 <SelfCheck>, <ActionItem>, <Mermaid> 등으로 바로 사용 가능
 export const mdxComponents = {
@@ -51,4 +55,9 @@ export const mdxComponents = {
   TechDebtGraph,
   BuilderCycle,
   FeedbackMatrix,
+  // Phase 3 인터랙티브
+  ProgressChecklist,
+  CheckItem,
+  DiagnosticQuiz,
+  LayerDiagram,
 };
