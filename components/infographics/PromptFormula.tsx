@@ -1,6 +1,8 @@
 // ch10 — 좋은 프롬프트 4요소 카드 그리드 인포그래픽
 // 맥락 / 구체적 지시 / 제약 조건 / 기대 결과
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 // 4요소 카드 데이터 정의
 const cards = [
   {
@@ -59,46 +61,48 @@ const cards = [
 
 export function PromptFormula() {
   return (
-    <div className="not-prose my-8">
-      {/* 1열(모바일) → 2열(sm) → 4열(lg) 반응형 그리드 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {cards.map((card) => (
-          <div
-            key={card.title}
-            className={`
-              rounded-xl border overflow-hidden flex flex-col
-              ${card.color.bg} ${card.color.border}
-            `}
-          >
-            {/* 상단 액센트 컬러 바 (3px) */}
-            <div className={`h-[3px] w-full ${card.color.bar}`} />
+    <ScrollReveal>
+      <div className="not-prose my-8">
+        {/* 1열(모바일) → 2열(sm) → 4열(lg) 반응형 그리드 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {cards.map((card) => (
+            <div
+              key={card.title}
+              className={`
+                rounded-xl border overflow-hidden flex flex-col
+                ${card.color.bg} ${card.color.border}
+              `}
+            >
+              {/* 상단 액센트 컬러 바 (3px) */}
+              <div className={`h-[3px] w-full ${card.color.bar}`} />
 
-            {/* 카드 본문 */}
-            <div className="p-5 flex flex-col items-center text-center flex-1">
-              {/* 큰 아이콘 영역 */}
-              <div
-                className={`
-                  w-14 h-14 rounded-full flex items-center justify-center
-                  text-3xl mb-4 mt-1
-                  ${card.color.icon}
-                `}
-              >
-                {card.emoji}
+              {/* 카드 본문 */}
+              <div className="p-5 flex flex-col items-center text-center flex-1">
+                {/* 큰 아이콘 영역 */}
+                <div
+                  className={`
+                    w-14 h-14 rounded-full flex items-center justify-center
+                    text-3xl mb-4 mt-1
+                    ${card.color.icon}
+                  `}
+                >
+                  {card.emoji}
+                </div>
+
+                {/* 제목 */}
+                <h3 className={`text-base font-bold mb-2 ${card.color.title}`}>
+                  {card.title}
+                </h3>
+
+                {/* 설명 */}
+                <p className={`text-sm leading-relaxed ${card.color.desc}`}>
+                  {card.description}
+                </p>
               </div>
-
-              {/* 제목 */}
-              <h3 className={`text-base font-bold mb-2 ${card.color.title}`}>
-                {card.title}
-              </h3>
-
-              {/* 설명 */}
-              <p className={`text-sm leading-relaxed ${card.color.desc}`}>
-                {card.description}
-              </p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

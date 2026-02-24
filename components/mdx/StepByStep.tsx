@@ -3,6 +3,7 @@
 // 타임라인 선: violet 계열 (Callout의 emerald/amber/blue와 차별화)
 
 import React from "react";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 // ─── Step (단일 단계) ────────────────────────────────────────────────────────
 
@@ -77,13 +78,15 @@ interface StepByStepProps {
 
 export function StepByStep({ children }: StepByStepProps) {
   return (
-    // not-prose : typography 플러그인의 스타일 간섭 차단
-    // [counter-reset:step] : 이 블록 안에서 step counter를 0으로 초기화
-    //   → 각 Step의 [counter-increment:step]이 1부터 시작
-    <div className="not-prose my-8">
-      <ol className="flex flex-col [counter-reset:step]">
-        {children}
-      </ol>
-    </div>
+    <ScrollReveal>
+      {/* not-prose : typography 플러그인의 스타일 간섭 차단 */}
+      {/* [counter-reset:step] : 이 블록 안에서 step counter를 0으로 초기화 */}
+      {/*   → 각 Step의 [counter-increment:step]이 1부터 시작 */}
+      <div className="not-prose my-8">
+        <ol className="flex flex-col [counter-reset:step]">
+          {children}
+        </ol>
+      </div>
+    </ScrollReveal>
   );
 }

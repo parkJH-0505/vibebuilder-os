@@ -1,6 +1,8 @@
 // ch00 — 4단계 여정 로드맵 인포그래픽
 // 아이디어 → 기획 → 구현 → 런칭 수평/수직 타임라인
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 // 각 단계 데이터 정의
 const steps = [
   {
@@ -59,77 +61,79 @@ const steps = [
 
 export function JourneyRoadmap() {
   return (
-    <div className="not-prose my-8">
-      {/* 데스크탑: 수평 타임라인 / 모바일: 수직 스택 */}
-      <div className="relative flex flex-col md:flex-row items-stretch md:items-start gap-4 md:gap-0">
-        {steps.map((step, index) => (
-          <div key={step.title} className="flex flex-col md:flex-1 items-center relative">
+    <ScrollReveal>
+      <div className="not-prose my-8">
+        {/* 데스크탑: 수평 타임라인 / 모바일: 수직 스택 */}
+        <div className="relative flex flex-col md:flex-row items-stretch md:items-start gap-4 md:gap-0">
+          {steps.map((step, index) => (
+            <div key={step.title} className="flex flex-col md:flex-1 items-center relative">
 
-            {/* 단계 카드 */}
-            <div
-              className={`
-                w-full md:mx-2 rounded-xl border-2 p-4 flex flex-col items-center text-center
-                ${step.color.bg} ${step.color.border}
-              `}
-            >
-              {/* 원형 아이콘 */}
+              {/* 단계 카드 */}
               <div
                 className={`
-                  w-10 h-10 rounded-full flex items-center justify-center text-xl
-                  ${step.color.icon} mb-2 shadow-sm
+                  w-full md:mx-2 rounded-xl border-2 p-4 flex flex-col items-center text-center
+                  ${step.color.bg} ${step.color.border}
                 `}
               >
-                {step.emoji}
+                {/* 원형 아이콘 */}
+                <div
+                  className={`
+                    w-10 h-10 rounded-full flex items-center justify-center text-xl
+                    ${step.color.icon} mb-2 shadow-sm
+                  `}
+                >
+                  {step.emoji}
+                </div>
+
+                {/* 단계 번호 */}
+                <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 mb-0.5">
+                  STEP {index + 1}
+                </span>
+
+                {/* 단계명 */}
+                <h3 className={`text-base font-bold mb-2 ${step.color.text}`}>
+                  {step.title}
+                </h3>
+
+                {/* Part / 챕터 배지 */}
+                <div className="flex flex-col gap-1 items-center">
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${step.color.badge}`}>
+                    {step.range}
+                  </span>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${step.color.badge}`}>
+                    {step.chapters}
+                  </span>
+                </div>
               </div>
 
-              {/* 단계 번호 */}
-              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 mb-0.5">
-                STEP {index + 1}
-              </span>
+              {/* 연결선: 데스크탑은 오른쪽, 모바일은 아래 */}
+              {index < steps.length - 1 && (
+                <>
+                  {/* 데스크탑 연결선 (절대 위치로 카드 사이에 배치) */}
+                  <div className="hidden md:flex absolute top-5 -right-3 z-10 items-center">
+                    <div className="w-6 border-t-2 border-dashed border-gray-300 dark:border-gray-600" />
+                    <span className="text-gray-400 dark:text-gray-500 text-xs">▶</span>
+                  </div>
 
-              {/* 단계명 */}
-              <h3 className={`text-base font-bold mb-2 ${step.color.text}`}>
-                {step.title}
-              </h3>
-
-              {/* Part / 챕터 배지 */}
-              <div className="flex flex-col gap-1 items-center">
-                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${step.color.badge}`}>
-                  {step.range}
-                </span>
-                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${step.color.badge}`}>
-                  {step.chapters}
-                </span>
-              </div>
+                  {/* 모바일 연결선 (수직) */}
+                  <div className="flex md:hidden flex-col items-center my-1">
+                    <div className="h-5 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
+                    <span className="text-gray-400 dark:text-gray-500 text-xs leading-none">▼</span>
+                  </div>
+                </>
+              )}
             </div>
+          ))}
+        </div>
 
-            {/* 연결선: 데스크탑은 오른쪽, 모바일은 아래 */}
-            {index < steps.length - 1 && (
-              <>
-                {/* 데스크탑 연결선 (절대 위치로 카드 사이에 배치) */}
-                <div className="hidden md:flex absolute top-5 -right-3 z-10 items-center">
-                  <div className="w-6 border-t-2 border-dashed border-gray-300 dark:border-gray-600" />
-                  <span className="text-gray-400 dark:text-gray-500 text-xs">▶</span>
-                </div>
-
-                {/* 모바일 연결선 (수직) */}
-                <div className="flex md:hidden flex-col items-center my-1">
-                  <div className="h-5 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
-                  <span className="text-gray-400 dark:text-gray-500 text-xs leading-none">▼</span>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+        {/* 하단 전체 진행 바 */}
+        <div className="mt-4 flex h-1.5 rounded-full overflow-hidden">
+          <div className="flex-1 bg-emerald-400 dark:bg-emerald-500" />
+          <div className="flex-1 bg-blue-400 dark:bg-blue-500" />
+          <div className="flex-1 bg-amber-400 dark:bg-amber-500" />
+          <div className="flex-1 bg-violet-400 dark:bg-violet-500" />
+        </div>
       </div>
-
-      {/* 하단 전체 진행 바 */}
-      <div className="mt-4 flex h-1.5 rounded-full overflow-hidden">
-        <div className="flex-1 bg-emerald-400 dark:bg-emerald-500" />
-        <div className="flex-1 bg-blue-400 dark:bg-blue-500" />
-        <div className="flex-1 bg-amber-400 dark:bg-amber-500" />
-        <div className="flex-1 bg-violet-400 dark:bg-violet-500" />
-      </div>
-    </div>
+    </ScrollReveal>
   );
 }

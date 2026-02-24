@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import React from "react";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 // Tab 컴포넌트 — 단순 래퍼. Tabs 부모가 props를 직접 읽으므로 자체 렌더링 로직 없음
 interface TabProps {
@@ -31,37 +32,39 @@ export function Tabs({ children }: TabsProps) {
   const tabs = React.Children.toArray(children) as React.ReactElement<TabProps>[];
 
   return (
-    <div className="not-prose my-8 rounded-lg border border-zinc-200 dark:border-zinc-700">
-      {/* 탭 바 — 밑줄 인디케이터 방식 */}
-      <div className="flex border-b border-zinc-200 dark:border-zinc-700">
-        {tabs.map((tab, index) => {
-          const isActive = index === activeTab;
-          return (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              className={[
-                // 공통 스타일
-                "px-4 py-3 text-sm transition-colors duration-150",
-                "border-b-2 -mb-px", // 밑줄 인디케이터 (탭 바 border 위에 겹침)
-                // 활성/비활성 상태에 따른 분기
-                isActive
-                  ? "border-indigo-600 font-semibold text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-                  : "border-transparent font-normal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200",
-              ].join(" ")}
-              aria-selected={isActive}
-              role="tab"
-            >
-              {tab.props.label}
-            </button>
-          );
-        })}
-      </div>
+    <ScrollReveal>
+      <div className="not-prose my-8 rounded-lg border border-zinc-200 dark:border-zinc-700">
+        {/* 탭 바 — 밑줄 인디케이터 방식 */}
+        <div className="flex border-b border-zinc-200 dark:border-zinc-700">
+          {tabs.map((tab, index) => {
+            const isActive = index === activeTab;
+            return (
+              <button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                className={[
+                  // 공통 스타일
+                  "px-4 py-3 text-sm transition-colors duration-150",
+                  "border-b-2 -mb-px", // 밑줄 인디케이터 (탭 바 border 위에 겹침)
+                  // 활성/비활성 상태에 따른 분기
+                  isActive
+                    ? "border-indigo-600 font-semibold text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+                    : "border-transparent font-normal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200",
+                ].join(" ")}
+                aria-selected={isActive}
+                role="tab"
+              >
+                {tab.props.label}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* 탭 콘텐츠 영역 — 활성 탭의 children만 렌더링 */}
-      <div className="px-5 py-4 text-sm text-zinc-700 dark:text-zinc-300">
-        {tabs[activeTab]}
+        {/* 탭 콘텐츠 영역 — 활성 탭의 children만 렌더링 */}
+        <div className="px-5 py-4 text-sm text-zinc-700 dark:text-zinc-300">
+          {tabs[activeTab]}
+        </div>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

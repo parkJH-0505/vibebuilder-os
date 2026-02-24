@@ -47,13 +47,36 @@ export function getChapterSource(slug: string): string {
   return fs.readFileSync(filePath, "utf-8");
 }
 
-// slug로 이전/다음 챕터 찾기
-export function getAdjacentChapters(slug: string) {
+// 인접 챕터 정보 타입
+export interface AdjacentChapter {
+  slug: string;
+  title: string;
+  part: string;
+}
+
+// slug로 이전/다음 챕터 찾기 — title과 part를 함께 반환
+export function getAdjacentChapters(slug: string): {
+  prev: AdjacentChapter | null;
+  next: AdjacentChapter | null;
+} {
   const slugs = getAllChapterSlugs();
   const index = slugs.indexOf(slug);
+
+  function getChapterInfo(s: string): AdjacentChapter {
+    const source = getChapterSource(s);
+    // frontmatter에서 title, part를 정규식으로 파싱 (gray-matter 의존성 불필요)
+    const titleMatch = source.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+    const partMatch = source.match(/^part:\s*["']?(.+?)["']?\s*$/m);
+    return {
+      slug: s,
+      title: titleMatch?.[1] ?? s,
+      part: partMatch?.[1] ?? "",
+    };
+  }
+
   return {
-    prev: index > 0 ? slugs[index - 1] : null,
-    next: index < slugs.length - 1 ? slugs[index + 1] : null,
+    prev: index > 0 ? getChapterInfo(slugs[index - 1]) : null,
+    next: index < slugs.length - 1 ? getChapterInfo(slugs[index + 1]) : null,
   };
 }
 

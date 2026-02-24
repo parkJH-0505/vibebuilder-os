@@ -1,6 +1,8 @@
 // ch01 — 식당 = 프로덕트 5요소 매핑
 // 식당 비유와 IT 프로덕트 5요소의 1:1 대응 테이블
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 // 매핑 데이터: 식당 ↔ IT
 const mappings = [
   {
@@ -67,7 +69,8 @@ const mappings = [
 
 export function RestaurantMapping() {
   return (
-    <div className="not-prose my-8">
+    <ScrollReveal>
+      <div className="not-prose my-8">
       {/* 헤더 라벨 행 */}
       <div className="flex items-center gap-2 sm:gap-3 mb-2 px-1">
         {/* 식당 헤더 */}
@@ -143,6 +146,7 @@ export function RestaurantMapping() {
         ))}
       </div>
 
-    </div>
+      </div>
+    </ScrollReveal>
   );
 }

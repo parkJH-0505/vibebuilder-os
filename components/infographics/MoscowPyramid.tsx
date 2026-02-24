@@ -1,6 +1,8 @@
 // ch07 — MoSCoW 우선순위 역피라미드 인포그래픽
 // Must → Should → Could → Won't, 위가 좁고 아래가 넓은 역피라미드
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 // 각 레이어 데이터 정의 (위에서 아래 순서)
 const layers = [
   {
@@ -51,67 +53,69 @@ const layers = [
 
 export function MoscowPyramid() {
   return (
-    <div className="not-prose my-8">
-      <div className="flex gap-4 items-start">
+    <ScrollReveal>
+      <div className="not-prose my-8">
+        <div className="flex gap-4 items-start">
 
-        {/* 좌측 "← 줄여라" 화살표 레이블 */}
-        <div className="hidden sm:flex flex-col items-center justify-center self-stretch py-2 gap-1">
-          {/* 위쪽: 좁음 표시 */}
-          <span className="text-xs text-gray-400 dark:text-gray-500 font-medium whitespace-nowrap">줄여라</span>
-          {/* 세로 화살표 */}
-          <div className="flex flex-col items-center flex-1">
-            <span className="text-gray-400 dark:text-gray-500 text-sm">▲</span>
-            <div className="flex-1 w-px bg-gray-300 dark:bg-gray-600 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
+          {/* 좌측 "← 줄여라" 화살표 레이블 */}
+          <div className="hidden sm:flex flex-col items-center justify-center self-stretch py-2 gap-1">
+            {/* 위쪽: 좁음 표시 */}
+            <span className="text-xs text-gray-400 dark:text-gray-500 font-medium whitespace-nowrap">줄여라</span>
+            {/* 세로 화살표 */}
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-gray-400 dark:text-gray-500 text-sm">▲</span>
+              <div className="flex-1 w-px bg-gray-300 dark:bg-gray-600 border-l-2 border-dashed border-gray-300 dark:border-gray-600" />
+            </div>
           </div>
-        </div>
 
-        {/* 피라미드 본체 */}
-        <div className="flex-1 flex flex-col items-center gap-2">
-          {layers.map((layer, index) => (
-            <div
-              key={layer.label}
-              className={`
-                ${layer.width} ${layer.color.bg}
-                mx-auto rounded-lg px-4 py-3
-                flex flex-row sm:flex-row items-center justify-between gap-2
-                transition-all duration-200
-              `}
-            >
-              {/* 이모지 + 라벨 */}
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-base flex-shrink-0">{layer.emoji}</span>
-                <span className={`text-sm font-bold ${layer.color.text} whitespace-nowrap`}>
-                  {layer.label}
+          {/* 피라미드 본체 */}
+          <div className="flex-1 flex flex-col items-center gap-2">
+            {layers.map((layer, index) => (
+              <div
+                key={layer.label}
+                className={`
+                  ${layer.width} ${layer.color.bg}
+                  mx-auto rounded-lg px-4 py-3
+                  flex flex-row sm:flex-row items-center justify-between gap-2
+                  transition-all duration-200
+                `}
+              >
+                {/* 이모지 + 라벨 */}
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-base flex-shrink-0">{layer.emoji}</span>
+                  <span className={`text-sm font-bold ${layer.color.text} whitespace-nowrap`}>
+                    {layer.label}
+                  </span>
+                </div>
+
+                {/* 설명 텍스트 */}
+                <span className={`text-xs ${layer.color.desc} text-right hidden sm:block`}>
+                  {layer.description}
                 </span>
               </div>
+            ))}
 
-              {/* 설명 텍스트 */}
-              <span className={`text-xs ${layer.color.desc} text-right hidden sm:block`}>
-                {layer.description}
+            {/* 모바일용 설명 (바 외부) */}
+            <div className="sm:hidden mt-2 space-y-1 w-full">
+              {layers.map((layer) => (
+                <div key={`desc-${layer.label}`} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span>{layer.emoji}</span>
+                  <span className="font-medium">{layer.label}:</span>
+                  <span>{layer.description}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* 하단 "MVP 범위" 표시선 */}
+            <div className="w-[65%] mt-1 flex flex-col items-center gap-1">
+              <div className="w-full border-t-2 border-dashed border-emerald-400 dark:border-emerald-500" />
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                ↑ MVP 범위
               </span>
             </div>
-          ))}
-
-          {/* 모바일용 설명 (바 외부) */}
-          <div className="sm:hidden mt-2 space-y-1 w-full">
-            {layers.map((layer) => (
-              <div key={`desc-${layer.label}`} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                <span>{layer.emoji}</span>
-                <span className="font-medium">{layer.label}:</span>
-                <span>{layer.description}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* 하단 "MVP 범위" 표시선 */}
-          <div className="w-[65%] mt-1 flex flex-col items-center gap-1">
-            <div className="w-full border-t-2 border-dashed border-emerald-400 dark:border-emerald-500" />
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-              ↑ MVP 범위
-            </span>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

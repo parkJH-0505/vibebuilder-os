@@ -1,9 +1,12 @@
 // ch11 — 기술 부채 누적 그래프
 // 시간 경과에 따른 개발 속도 비교: 부채 무시(A, 빨강) vs 주기적 정리(B, 초록)
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 export function TechDebtGraph() {
   return (
-    <div className="not-prose my-8">
+    <ScrollReveal>
+      <div className="not-prose my-8">
       <div className="mx-auto max-w-xl">
 
         {/* SVG 차트 */}
@@ -94,6 +97,7 @@ export function TechDebtGraph() {
         </div>
 
       </div>
-    </div>
+      </div>
+    </ScrollReveal>
   );
 }

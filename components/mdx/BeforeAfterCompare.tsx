@@ -2,6 +2,7 @@
 // 데스크탑: 가로 배치(Before → 화살표 → After), 모바일: 세로 스택
 
 import React from "react";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 // ─── 타입 정의 ────────────────────────────────────────────────────────────────
 
@@ -40,52 +41,54 @@ export function BeforeAfterCompare({
   const afterContent = items[1];
 
   return (
-    <div className="not-prose my-8">
-      {/*
-        데스크탑(md 이상): 3열 그리드 — Before | 화살표 | After
-        모바일: 단일 열 스택
-      */}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+    <ScrollReveal>
+      <div className="not-prose my-8">
+        {/*
+          데스크탑(md 이상): 3열 그리드 — Before | 화살표 | After
+          모바일: 단일 열 스택
+        */}
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
 
-        {/* Before 카드 */}
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
-          {/* Before 라벨 */}
-          <p className="mb-2 text-sm font-semibold text-red-700 dark:text-red-300">
-            {beforeLabel}
-          </p>
-          {/* Before 내용 */}
-          <div className="text-sm">{beforeContent}</div>
+          {/* Before 카드 */}
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
+            {/* Before 라벨 */}
+            <p className="mb-2 text-sm font-semibold text-red-700 dark:text-red-300">
+              {beforeLabel}
+            </p>
+            {/* Before 내용 */}
+            <div className="text-sm">{beforeContent}</div>
+          </div>
+
+          {/* 화살표 — 데스크탑: → (가로), 모바일: ↓ (세로) */}
+          <div className="flex items-center justify-center">
+            {/* 데스크탑 화살표: md 이상에서만 표시 */}
+            <span
+              className="hidden text-2xl text-gray-400 md:flex md:items-center md:justify-center"
+              aria-hidden="true"
+            >
+              →
+            </span>
+            {/* 모바일 화살표: md 미만에서만 표시 */}
+            <span
+              className="flex items-center justify-center text-2xl text-gray-400 md:hidden"
+              aria-hidden="true"
+            >
+              ↓
+            </span>
+          </div>
+
+          {/* After 카드 */}
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-800 dark:bg-emerald-900/20">
+            {/* After 라벨 */}
+            <p className="mb-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+              {afterLabel}
+            </p>
+            {/* After 내용 */}
+            <div className="text-sm">{afterContent}</div>
+          </div>
+
         </div>
-
-        {/* 화살표 — 데스크탑: → (가로), 모바일: ↓ (세로) */}
-        <div className="flex items-center justify-center">
-          {/* 데스크탑 화살표: md 이상에서만 표시 */}
-          <span
-            className="hidden text-2xl text-gray-400 md:flex md:items-center md:justify-center"
-            aria-hidden="true"
-          >
-            →
-          </span>
-          {/* 모바일 화살표: md 미만에서만 표시 */}
-          <span
-            className="flex items-center justify-center text-2xl text-gray-400 md:hidden"
-            aria-hidden="true"
-          >
-            ↓
-          </span>
-        </div>
-
-        {/* After 카드 */}
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-800 dark:bg-emerald-900/20">
-          {/* After 라벨 */}
-          <p className="mb-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
-            {afterLabel}
-          </p>
-          {/* After 내용 */}
-          <div className="text-sm">{afterContent}</div>
-        </div>
-
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

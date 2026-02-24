@@ -60,8 +60,8 @@ export default async function ChapterPage({ params }: PageProps) {
   const source = getChapterSource(slug);
   const { content, frontmatter } = await compileMDXContent(source);
 
-  // 이전/다음 챕터 slug
-  const { prev, next } = getAdjacentChapters(slug);
+  // 이전/다음 챕터 (slug, title, part 포함)
+  const { prev: adjPrev, next: adjNext } = getAdjacentChapters(slug);
 
   return (
     <>
@@ -81,7 +81,7 @@ export default async function ChapterPage({ params }: PageProps) {
         <ChapterComplete slug={slug} />
 
         {/* 이전/다음 챕터 네비게이션 */}
-        <ChapterNav prev={prev} next={next} />
+        <ChapterNav prev={adjPrev} next={adjNext} />
       </div>
     </>
   );

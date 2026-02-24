@@ -7,6 +7,7 @@
 // mermaid 라이브러리를 동적 로드하여 SVG로 렌더링
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 interface MermaidProps {
   chart?: string;
@@ -97,17 +98,19 @@ export function Mermaid({ chart, caption, children }: MermaidProps) {
   }
 
   return (
-    <figure className="not-prose my-8">
-      <div
-        ref={containerRef}
-        className="flex justify-center overflow-x-auto rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
-        dangerouslySetInnerHTML={svg ? { __html: svg } : undefined}
-      />
-      {caption && (
-        <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
+    <ScrollReveal>
+      <figure className="not-prose my-8">
+        <div
+          ref={containerRef}
+          className="flex justify-center overflow-x-auto rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
+          dangerouslySetInnerHTML={svg ? { __html: svg } : undefined}
+        />
+        {caption && (
+          <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    </ScrollReveal>
   );
 }

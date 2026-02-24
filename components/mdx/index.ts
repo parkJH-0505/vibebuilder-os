@@ -27,6 +27,8 @@ export { FeedbackMatrix } from "../infographics/FeedbackMatrix";
 export { ProgressChecklist, CheckItem } from "./ProgressChecklist";
 export { DiagnosticQuiz } from "./DiagnosticQuiz";
 export { LayerDiagram } from "./LayerDiagram";
+// Phase 4 폴리싱
+export { Term } from "./Term";
 
 // MDX compileMDX에 주입할 컴포넌트 매핑 객체
 // lib/mdx.ts에서 기본값으로 사용

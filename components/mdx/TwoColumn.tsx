@@ -6,6 +6,7 @@
 //         </TwoColumn>
 
 import React from "react";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 // 타입별 카드 스타일 매핑
 const columnConfig = {
@@ -61,37 +62,39 @@ export function TwoColumn({
   const rightConfig = columnConfig[rightType];
 
   return (
-    <div className="not-prose my-8">
-      {/* 데스크탑: 2열 그리드 / 모바일: 단일 열로 스택 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {/* 왼쪽 열 */}
-        <div className={`rounded-lg p-4 ${leftConfig.cardClass}`}>
-          {leftTitle && (
-            <p
-              className={`mb-2 text-sm font-semibold ${leftConfig.titleClass}`}
-            >
-              {leftTitle}
-            </p>
-          )}
-          <div className="text-sm text-gray-700 dark:text-gray-300">
-            {leftContent}
+    <ScrollReveal>
+      <div className="not-prose my-8">
+        {/* 데스크탑: 2열 그리드 / 모바일: 단일 열로 스택 */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {/* 왼쪽 열 */}
+          <div className={`rounded-lg p-4 ${leftConfig.cardClass}`}>
+            {leftTitle && (
+              <p
+                className={`mb-2 text-sm font-semibold ${leftConfig.titleClass}`}
+              >
+                {leftTitle}
+              </p>
+            )}
+            <div className="text-sm text-gray-700 dark:text-gray-300">
+              {leftContent}
+            </div>
           </div>
-        </div>
 
-        {/* 오른쪽 열 */}
-        <div className={`rounded-lg p-4 ${rightConfig.cardClass}`}>
-          {rightTitle && (
-            <p
-              className={`mb-2 text-sm font-semibold ${rightConfig.titleClass}`}
-            >
-              {rightTitle}
-            </p>
-          )}
-          <div className="text-sm text-gray-700 dark:text-gray-300">
-            {rightContent}
+          {/* 오른쪽 열 */}
+          <div className={`rounded-lg p-4 ${rightConfig.cardClass}`}>
+            {rightTitle && (
+              <p
+                className={`mb-2 text-sm font-semibold ${rightConfig.titleClass}`}
+              >
+                {rightTitle}
+              </p>
+            )}
+            <div className="text-sm text-gray-700 dark:text-gray-300">
+              {rightContent}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

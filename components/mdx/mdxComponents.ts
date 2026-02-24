@@ -25,6 +25,9 @@ import { FeedbackMatrix } from "../infographics/FeedbackMatrix";
 import { ProgressChecklist, CheckItem } from "./ProgressChecklist";
 import { DiagnosticQuiz } from "./DiagnosticQuiz";
 import { LayerDiagram } from "./LayerDiagram";
+// Phase 4 폴리싱
+import { CodeBlockWrapper } from "../ui/CodeBlockWrapper";
+import { Term } from "./Term";
 
 // MDX 파일에서 <SelfCheck>, <ActionItem>, <Mermaid> 등으로 바로 사용 가능
 export const mdxComponents = {
@@ -60,4 +63,7 @@ export const mdxComponents = {
   CheckItem,
   DiagnosticQuiz,
   LayerDiagram,
+  // Phase 4 폴리싱
+  pre: CodeBlockWrapper,
+  Term,
 };

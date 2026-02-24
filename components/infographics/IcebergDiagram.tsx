@@ -1,6 +1,8 @@
 // ch01 — 카카오톡 빙산 다이어그램
 // 수면 위 = 프론트엔드(바이브코딩이 만드는 것), 수면 아래 = API + 백엔드 + DB + 인프라
 
+import { ScrollReveal } from "../ui/ScrollReveal";
+
 // 수면 위 항목
 const aboveWater = [
   "메시지 입력창",
@@ -55,6 +57,7 @@ const belowWater = [
 
 export function IcebergDiagram() {
   return (
+    <ScrollReveal>
     <div className="not-prose my-8">
       {/* 전체 컨테이너: 최대 너비 제한 후 가운데 정렬 */}
       <div className="mx-auto max-w-lg">
@@ -156,5 +159,6 @@ export function IcebergDiagram() {
         </div>
       </div>
     </div>
+    </ScrollReveal>
   );
 }

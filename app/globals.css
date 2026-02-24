@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: "Pretendard Variable", "Pretendard", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Phase 4 — SelfCheck 딜레이드 리빌 fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
