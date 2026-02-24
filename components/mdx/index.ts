@@ -7,6 +7,12 @@ export { KeyTakeaway } from "./KeyTakeaway";
 export { NextPreview } from "./NextPreview";
 export { Callout } from "./Callout";
 export { Mermaid } from "./Mermaid";
+// Phase 1 신규 컴포넌트
+export { StepByStep, Step } from "./StepByStep";
+export { Tabs, Tab } from "./Tabs";
+export { TwoColumn, Left, Right } from "./TwoColumn";
+export { Figure } from "./Figure";
+export { BeforeAfterCompare, Before, After } from "./BeforeAfterCompare";
 
 // MDX compileMDX에 주입할 컴포넌트 매핑 객체
 // lib/mdx.ts에서 기본값으로 사용
